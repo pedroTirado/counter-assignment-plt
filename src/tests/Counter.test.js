@@ -1,7 +1,7 @@
 // import necessary react testing library helpers here
 // import the Counter component here
 import React from 'react'
-import { render, screen } from '@testing-library/react';
+import { render, fireEvent, waitFor, screen } from '@testing-library/react';
 import '@testing-library/jest-dom'
 import Counter from '../components/Counter';
 
@@ -26,9 +26,21 @@ test('should render initial count with value of 0', () => {
 test('clicking + increments the count', () => {
   // Complete the unit test below based on the objective in the line above
   render(<Counter />);
+  
+  fireEvent.click(screen.getByText('+'));
+
+  const incrCount = screen.getByTestId('count');
+
+  expect(incrCount).toHaveTextContent('1');
 });
 
 test('clicking - decrements the count', () => {
   // Complete the unit test below based on the objective in the line above
   render(<Counter />);
+
+  fireEvent.click(screen.getByText('-'));
+
+  const incrCount = screen.getByTestId('count');
+
+  expect(incrCount).toHaveTextContent('-1');
 });
